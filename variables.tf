@@ -1,69 +1,140 @@
+
 variable "resource_group_name" {
   type        = string
-  description = "RG name in Azure"
+  default     = "aks_tf_rg"
+  description = "RG name in Azure."
 }
 
 variable "location" {
   type        = string
-  description = "Resource location in Azure"
+  default     = "West Europe"
+  description = "Resource location in Azure."
 }
 
-variable "cluster_name" {
+variable "dns_prefix" {
   type        = string
-  description = "AKS name in Azure"
+  default     = "aks"
+  description = "The DNS Prefix of the managed Kubernetes cluster."
 }
 
-variable "kubernetes_version" {
+variable "name" {
   type        = string
-  description = "Kubernetes version"
+  default     = "basic"
+  description = "AKS name in Azure."
 }
 
-variable "system_node_count" {
+variable "role_based_access_control_enabled" {
+  type        = bool
+  default     = false
+  description = "Is Role Based Access Control enabled for this managed Kubernetes Cluster."
+}
+
+variable "node_pool_name" {
+  type        = string
+  default     = "agentpool"
+  description = "The name which should be used for the default Kubernetes Node Pool."
+}
+
+variable "vm_size" {
+  type        = string
+  default     = "Standard_DS2_v2"
+  description = "The size of the Virtual Machine."
+}
+
+variable "node_count" {
   type        = number
-  description = "Number of AKS worker nodes"
+  default     = 1
+  description = "The number of nodes which should exist in this Node Pool."
 }
 
-variable "acr_name" {
+variable "identity_type" {
   type        = string
-  description = "ACR name"
+  default     = "SystemAssigned"
+  description = "Specifies the type of Managed Service Identity that should be configured on this Kubernetes Cluster."
 }
 
-variable "role_definition_name" {
-  type    = string
-  default = "AcrPull"
+variable "admin_username" {
+  type        = string
+  default     = null
+  description = "The Admin Username for the Cluster."
 }
 
-variable "skip_service_principal_aad_check" {
-  type    = bool
-  default = true
+variable "linux_profile" {
+  type = object({
+    admin_username = string
+    ssh_key        = string
+  })
+  default     = null
+  description = "admin_username - The Admin Username for the Cluster. ssh_key - An ssh_key block."
 }
 
-variable "virtual_network_name" {
-  type    = string
-  default = "example-network"
+variable "workload_runtime" {
+  type        = string
+  default     = "OCIContainer"
+  description = "Used to specify the workload runtime."
 }
 
-variable "address_space" {
-  type    = list(string)
-  default = ["10.254.0.0/16"]
+variable "mode" {
+  type        = string
+  default     = "System"
+  description = "Used to specify the workload runtime."
 }
 
-variable "address_prefixes_1" {
-  type    = list(string)
-  default = ["10.254.0.0/24"]
+variable "ingress_application_gateway_enabled" {
+  type        = bool
+  default     = false
+  description = "Whether to deploy the Application Gateway ingress controller to this Kubernetes Cluster?"
 }
 
-variable "address_prefixes_2" {
-  type    = list(string)
-  default = ["10.254.2.0/24"]
+variable "ingress_application_gateway_id" {
+  type        = string
+  default     = null
+  description = "The ID of the Application Gateway to integrate with the ingress controller of this Kubernetes Cluster."
 }
 
-variable "public_ip_name" {
-  type    = string
-  default = "example-pip"
+variable "ingress_application_gateway_name" {
+  type        = string
+  default     = null
+  description = "The name of the Application Gateway to be used or created in the Nodepool Resource Group, which in turn will be integrated with the ingress controller of this Kubernetes Cluster."
 }
 
-variable "app_gw_name" {
-  type    = string
-  default = "example-appgateway"
+variable "ingress_application_gateway_subnet_cidr" {
+  type        = string
+  default     = null
+  description = "The subnet CIDR to be used to create an Application Gateway, which in turn will be integrated with the ingress controller of this Kubernetes Cluster."
+}
+
+variable "ingress_application_gateway_subnet_id" {
+  type        = string
+  default     = null
+  description = "The ID of the subnet on which to create an Application Gateway, which in turn will be integrated with the ingress controller of this Kubernetes Cluster."
+}
+
+variable "log_analytics_workspace_name" {
+  type        = string
+  default     = "analytics-workspace"
+  description = "Name of log analytics workspace."
+}
+variable "log_analytics_workspace_resource_location" {
+  type        = string
+  default     = null
+  description = "Location of log analytics workspace resource group. It will be the same as cluster's resource group's location by default."
+}
+
+variable "log_analytics_workspace_resource_group_name" {
+  type        = string
+  default     = null
+  description = "Name of log analytics workspace resource group. It will be the same as cluster's resource group's name by default."
+}
+
+variable "log_analytics_workspace_sku" {
+  type        = string
+  default     = "PerGB2018"
+  description = "The SKU (pricing level) of the Log Analytics workspace."
+}
+
+variable "solution_name" {
+  type        = string
+  default     = "ContainerInsights"
+  description = "Specifies the name of the solution to be deployed."
 }
