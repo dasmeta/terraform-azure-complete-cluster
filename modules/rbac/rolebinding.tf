@@ -1,4 +1,4 @@
-resource "kubernetes_role_binding" "example" {
+resource "kubernetes_role_binding" "krolebinding" {
 
   for_each = { for bind in var.bindings : "${bind.namespace}-${bind.group}" => bind }
 
