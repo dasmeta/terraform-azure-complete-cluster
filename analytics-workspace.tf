@@ -8,4 +8,6 @@ resource "azurerm_log_analytics_workspace" "workspace" {
   location            = coalesce(var.log_analytics_workspace_resource_location, var.location)
   resource_group_name = coalesce(var.log_analytics_workspace_resource_group_name, var.resource_group_name)
   sku                 = var.log_analytics_workspace_sku
+
+  depends_on = [azurerm_resource_group.rg]
 }

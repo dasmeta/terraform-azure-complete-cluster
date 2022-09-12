@@ -12,6 +12,12 @@ module "aks-2" {
   ingress_application_gateway_enabled = true
   ingress_application_gateway_name = "app-gw"
   ingress_application_gateway_subnet_cidr = "10.225.0.0/16"
+  
+  admin_group_name = "kubeadmin"
+  aad_rbac = true
+
+  roles = local.roles
+  bindings = local.bindings
 }
 ```
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
