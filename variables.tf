@@ -1,7 +1,7 @@
 
 variable "resource_group_name" {
   type        = string
-  default     = "aks_tf_rg"
+  default     = "aks_tf_rg1"
   description = "RG name in Azure."
 }
 
@@ -23,11 +23,11 @@ variable "name" {
   description = "AKS name in Azure."
 }
 
-variable "role_based_access_control_enabled" {
-  type        = bool
-  default     = false
-  description = "Is Role Based Access Control enabled for this managed Kubernetes Cluster."
-}
+#variable "role_based_access_control_enabled" {
+#  type        = bool
+#  default     = false
+#  description = "Is Role Based Access Control enabled for this managed Kubernetes Cluster."
+#}
 
 variable "node_pool_name" {
   type        = string
@@ -137,4 +137,31 @@ variable "solution_name" {
   type        = string
   default     = "ContainerInsights"
   description = "Specifies the name of the solution to be deployed."
+}
+
+variable "aad_rbac" {
+  type = bool
+  default = false
+}
+
+variable "admin_group_name" {
+  type = string
+}
+
+variable "bindings" {
+  type = list(object({
+    group     = string
+    namespace = string
+    roles = list(string)
+  }))
+  default = []
+}
+
+
+variable "roles" {
+  type = list(object({
+    actions    = list(string)
+    resources = list(string)
+  }))
+  default = []
 }
