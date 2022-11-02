@@ -140,19 +140,20 @@ variable "solution_name" {
 }
 
 variable "aad_rbac" {
-  type = bool
+  type    = bool
   default = false
 }
 
 variable "admin_group_name" {
-  type = string
+  default = null
+  type    = string
 }
 
 variable "bindings" {
   type = list(object({
     group     = string
     namespace = string
-    roles = list(string)
+    roles     = list(string)
   }))
   default = []
 }
@@ -160,7 +161,7 @@ variable "bindings" {
 
 variable "roles" {
   type = list(object({
-    actions    = list(string)
+    actions   = list(string)
     resources = list(string)
   }))
   default = []
