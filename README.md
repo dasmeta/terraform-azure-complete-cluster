@@ -12,7 +12,7 @@ module "aks-2" {
   ingress_application_gateway_enabled = true
   ingress_application_gateway_name = "app-gw"
   ingress_application_gateway_subnet_cidr = "10.225.0.0/16"
-  
+
   admin_group_name = "kubeadmin"
   aad_rbac = true
 
@@ -29,12 +29,15 @@ No requirements.
 
 | Name | Version |
 |------|---------|
+| <a name="provider_azuread"></a> [azuread](#provider\_azuread) | n/a |
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | n/a |
 | <a name="provider_random"></a> [random](#provider\_random) | n/a |
 
 ## Modules
 
-No modules.
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_rbac"></a> [rbac](#module\_rbac) | ./modules/rbac | n/a |
 
 ## Resources
 
@@ -44,13 +47,18 @@ No modules.
 | [azurerm_kubernetes_cluster_node_pool.pool](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster_node_pool) | resource |
 | [azurerm_log_analytics_solution.solution](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/log_analytics_solution) | resource |
 | [azurerm_log_analytics_workspace.workspace](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/log_analytics_workspace) | resource |
+| [azurerm_resource_group.rg](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group) | resource |
 | [random_id.log_analytics_workspace_name_suffix](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/id) | resource |
+| [azuread_group.ad_group](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/data-sources/group) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_aad_rbac"></a> [aad\_rbac](#input\_aad\_rbac) | n/a | `bool` | `false` | no |
+| <a name="input_admin_group_name"></a> [admin\_group\_name](#input\_admin\_group\_name) | n/a | `string` | `null` | no |
 | <a name="input_admin_username"></a> [admin\_username](#input\_admin\_username) | The Admin Username for the Cluster. | `string` | `null` | no |
+| <a name="input_bindings"></a> [bindings](#input\_bindings) | n/a | <pre>list(object({<br>    group     = string<br>    namespace = string<br>    roles     = list(string)<br>  }))</pre> | `[]` | no |
 | <a name="input_dns_prefix"></a> [dns\_prefix](#input\_dns\_prefix) | The DNS Prefix of the managed Kubernetes cluster. | `string` | `"aks"` | no |
 | <a name="input_identity_type"></a> [identity\_type](#input\_identity\_type) | Specifies the type of Managed Service Identity that should be configured on this Kubernetes Cluster. | `string` | `"SystemAssigned"` | no |
 | <a name="input_ingress_application_gateway_enabled"></a> [ingress\_application\_gateway\_enabled](#input\_ingress\_application\_gateway\_enabled) | Whether to deploy the Application Gateway ingress controller to this Kubernetes Cluster? | `bool` | `false` | no |
@@ -68,13 +76,16 @@ No modules.
 | <a name="input_name"></a> [name](#input\_name) | AKS name in Azure. | `string` | `"basic"` | no |
 | <a name="input_node_count"></a> [node\_count](#input\_node\_count) | The number of nodes which should exist in this Node Pool. | `number` | `1` | no |
 | <a name="input_node_pool_name"></a> [node\_pool\_name](#input\_node\_pool\_name) | The name which should be used for the default Kubernetes Node Pool. | `string` | `"agentpool"` | no |
-| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | RG name in Azure. | `string` | `"aks_tf_rg"` | no |
-| <a name="input_role_based_access_control_enabled"></a> [role\_based\_access\_control\_enabled](#input\_role\_based\_access\_control\_enabled) | Is Role Based Access Control enabled for this managed Kubernetes Cluster. | `bool` | `false` | no |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | RG name in Azure. | `string` | `"aks_tf_rg1"` | no |
+| <a name="input_roles"></a> [roles](#input\_roles) | n/a | <pre>list(object({<br>    actions   = list(string)<br>    resources = list(string)<br>  }))</pre> | `[]` | no |
 | <a name="input_solution_name"></a> [solution\_name](#input\_solution\_name) | Specifies the name of the solution to be deployed. | `string` | `"ContainerInsights"` | no |
 | <a name="input_vm_size"></a> [vm\_size](#input\_vm\_size) | The size of the Virtual Machine. | `string` | `"Standard_DS2_v2"` | no |
 | <a name="input_workload_runtime"></a> [workload\_runtime](#input\_workload\_runtime) | Used to specify the workload runtime. | `string` | `"OCIContainer"` | no |
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_kube_admin_config"></a> [kube\_admin\_config](#output\_kube\_admin\_config) | n/a |
+| <a name="output_kube_config"></a> [kube\_config](#output\_kube\_config) | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

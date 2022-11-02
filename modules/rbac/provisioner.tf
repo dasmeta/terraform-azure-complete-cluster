@@ -1,6 +1,6 @@
 resource "null_resource" "bind_admin_group" {
 
-#  depends_on = [null_resource.enable_azure_rbac]
+  #  depends_on = [null_resource.enable_azure_rbac]
 
   #azure cli need to be installed and configured
   provisioner "local-exec" {
