@@ -4,21 +4,21 @@ resource "azurerm_resource_group" "rg" {
 }
 
 resource "azurerm_kubernetes_cluster" "aks" {
-  dns_prefix                        = var.dns_prefix
-  location                          = azurerm_resource_group.rg.location
-  name                              = var.name
-  resource_group_name               = azurerm_resource_group.rg.name
-  role_based_access_control_enabled = var.aad_rbac
+  dns_prefix          = var.dns_prefix
+  location            = azurerm_resource_group.rg.location
+  name                = var.name
+  resource_group_name = azurerm_resource_group.rg.name
+  # role_based_access_control_enabled = var.aad_rbac
 
-  dynamic "azure_active_directory_role_based_access_control" {
-    for_each = var.admin_group_name != null ? ["admin_group_name"] : []
+  # dynamic "azure_active_directory_role_based_access_control" {
+  #   for_each = var.admin_group_name != null ? ["admin_group_name"] : []
 
-    content {
-      managed                = true
-      azure_rbac_enabled     = false
-      admin_group_object_ids = [data.azuread_group.ad_group.*.id]
-    }
-  }
+  #   content {
+  #     managed                = true
+  #     azure_rbac_enabled     = false
+  #     admin_group_object_ids = [data.azuread_group.ad_group.*.id]
+  #   }
+  # }
 
   default_node_pool {
     name       = var.node_pool_name
@@ -54,9 +54,9 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
 }
 
-data "azuread_group" "ad_group" {
-  count = var.admin_group_name != null ? 1 : 0
+# data "azuread_group" "ad_group" {
+#   count = var.admin_group_name != null ? 1 : 0
 
-  display_name     = var.admin_group_name
-  security_enabled = true
-}
+#   display_name     = var.admin_group_name
+#   security_enabled = true
+# }

@@ -29,15 +29,12 @@ No requirements.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azuread"></a> [azuread](#provider\_azuread) | n/a |
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | n/a |
 | <a name="provider_random"></a> [random](#provider\_random) | n/a |
 
 ## Modules
 
-| Name | Source | Version |
-|------|--------|---------|
-| <a name="module_rbac"></a> [rbac](#module\_rbac) | ./modules/rbac | n/a |
+No modules.
 
 ## Resources
 
@@ -49,7 +46,6 @@ No requirements.
 | [azurerm_log_analytics_workspace.workspace](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/log_analytics_workspace) | resource |
 | [azurerm_resource_group.rg](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group) | resource |
 | [random_id.log_analytics_workspace_name_suffix](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/id) | resource |
-| [azuread_group.ad_group](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/data-sources/group) | data source |
 
 ## Inputs
 
@@ -84,8 +80,5 @@ No requirements.
 
 ## Outputs
 
-| Name | Description |
-|------|-------------|
-| <a name="output_kube_admin_config"></a> [kube\_admin\_config](#output\_kube\_admin\_config) | n/a |
-| <a name="output_kube_config"></a> [kube\_config](#output\_kube\_config) | n/a |
+No outputs.
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
