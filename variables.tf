@@ -166,3 +166,9 @@ variable "roles" {
   }))
   default = []
 }
+
+variable "create_resource_group" {
+  type        = bool
+  default     = false
+  description = "Whether to create a Resource Group or not."
+}

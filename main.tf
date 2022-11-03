@@ -1,13 +1,15 @@
 resource "azurerm_resource_group" "rg" {
+  count = var.create_resource_group ? 1 : 0
+
   location = var.location
   name     = var.resource_group_name
 }
 
 resource "azurerm_kubernetes_cluster" "aks" {
   dns_prefix          = var.dns_prefix
-  location            = azurerm_resource_group.rg.location
+  location            = var.location
   name                = var.name
-  resource_group_name = azurerm_resource_group.rg.name
+  resource_group_name = var.resource_group_name
   # role_based_access_control_enabled = var.aad_rbac
 
   # dynamic "azure_active_directory_role_based_access_control" {
